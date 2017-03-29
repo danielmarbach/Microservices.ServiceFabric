@@ -13,3 +13,10 @@ The font used in the slides is
 # Links
 ## About me
 * [Geeking out with Daniel Marbach]( http://developeronfire.com/episode-077-daniel-marbach-geeking-out)
+
+## Service Fabric
+
+* [Routing Network traffic to stateul services in Service Fabric](https://www.opsgility.com/blog/2016/11/02/routing-network-traffic-to-stateful-services-in-service-fabric/)
+* [Service Fabric Reverse Proxy](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-reverseproxy)
+* [C3 LS HTTP based Routing library](https://github.com/c3-ls/ServiceFabric-Http)
+* [Another HTTP based routing library by Khenidak](https://github.com/khenidak/Router)

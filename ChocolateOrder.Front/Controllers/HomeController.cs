@@ -22,21 +22,21 @@ namespace ChocolateOrder.Front.Controllers
         [HttpPost]
         public async Task<IActionResult> Dark()
         {
-            await messageSession.Send(new OrderChocolate { ChocolateType = "Dark" });
+            await messageSession.Send(new OrderChocolate("Dark"));
             return View("Index");
         }
 
         [HttpPost]
         public async Task<IActionResult> Brown()
         {
-            await messageSession.Send(new OrderChocolate { ChocolateType = "Brown" });
+            await messageSession.Send(new OrderChocolate("Brown"));
             return View("Index");
         }
 
         [HttpPost]
         public async Task<IActionResult> White()
         {
-            await messageSession.Send(new OrderChocolate { ChocolateType = "White" });
+            await messageSession.Send(new OrderChocolate("White"));
             return View("Index");
         }
 

@@ -1,10 +1,9 @@
-﻿using System;
-using NServiceBus;
+﻿using NServiceBus;
 
 namespace Contracts
 {
     public class OrderShipped : IEvent
     {
-        public Guid OrderId { get; set; }
+        public string OrderId { get; set; }
     }
 }

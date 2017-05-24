@@ -41,6 +41,7 @@ namespace ChocolateOrder
             routing.RouteToEndpoint(typeof(ShipOrder), "chocolateshipping");
 
             ConfigureLocalPartitionsChocolateOrder(endpointConfiguration, partitionInfo);
+            ConfigureReceiverSideDistributionOrderShipped(transport, partitionInfo);
 
             return null;
         }
@@ -51,6 +52,18 @@ namespace ChocolateOrder
             endpointConfiguration.RegisterPartitionsForThisEndpoint(
                 localPartitionKey: partitionInfo.LocalPartitionKey,
                 allPartitionKeys: partitionInfo.Partitions);
+        }
+
+        static void ConfigureReceiverSideDistributionOrderShipped(TransportExtensions<AzureServiceBusTransport> transportConfig, PartitionsInformation partitionInfo)
+        {
+            var routing = transportConfig.Routing();
+            var receiverSideDistribution = routing.EnableReceiverSideDistribution(partitionInfo.Partitions);
+            receiverSideDistribution.AddPartitionMappingForMessageType<OrderShipped>(
+                mapMessageToPartitionKey: orderShipped =>
+                {
+                    OrderId orderId = orderShipped.OrderId;
+                    return orderId.ChocolateType;
+                });
         }
 
         public async Task Run()

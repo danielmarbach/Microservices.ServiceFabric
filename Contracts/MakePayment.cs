@@ -7,6 +7,6 @@ namespace Contracts
     {
         public string ChocolateType { get; set; }
         public decimal Amount { get; set; }
-        public Guid OrderId { get; set; }
+        public string OrderId { get; set; }
     }
 }

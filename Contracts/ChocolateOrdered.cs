@@ -6,6 +6,6 @@ namespace Contracts
     public class ChocolateOrdered : IEvent
     {
         public string ChocolateType { get; set; }
-        public Guid OrderId { get; set; }
+        public string OrderId { get; set; }
     }
 }

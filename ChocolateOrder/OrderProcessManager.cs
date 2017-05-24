@@ -29,7 +29,7 @@ namespace ChocolateOrder
 
             Logger.Log($"OrderProcessManager: Order {Data.OrderId} and type {Data.ChocolateType} on partition { PartitionInformation.Name } removerse period started.");
 
-            return RequestTimeout<BuyersRemorsePeriodOver>(context, DateTime.UtcNow.AddSeconds(5));
+            return RequestTimeout<BuyersRemorsePeriodOver>(context, DateTime.UtcNow.AddSeconds(1));
         }
 
         public async Task Timeout(BuyersRemorsePeriodOver state, IMessageHandlerContext context)
@@ -59,7 +59,7 @@ namespace ChocolateOrder
         public class OrderProcessData :
             ContainSagaData
         {
-            public Guid OrderId { get; set; }
+            public string OrderId { get; set; }
             public string ChocolateType { get; set; }
         }
 

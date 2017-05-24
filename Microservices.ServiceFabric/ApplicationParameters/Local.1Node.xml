@@ -3,6 +3,8 @@
   <Parameters>
     <Parameter Name="Front_InstanceCount" Value="1" />
     <Parameter Name="ChocolateShipping_PartitionCount" Value="1" />
+    <Parameter Name="ChocolateShipping_LowKey" Value="0" />
+    <Parameter Name="ChocolateShipping_HighKey" Value="99000" />
     <Parameter Name="ChocolateShipping_MinReplicaSetSize" Value="1" />
     <Parameter Name="ChocolateShipping_TargetReplicaSetSize" Value="1" />
     <Parameter Name="ChocolateOrder_MinReplicaSetSize" Value="1" />

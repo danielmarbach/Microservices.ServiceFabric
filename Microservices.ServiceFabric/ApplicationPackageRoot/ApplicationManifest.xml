@@ -5,6 +5,8 @@
     <Parameter Name="ChocolateShipping_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="ChocolateShipping_PartitionCount" DefaultValue="1" />
     <Parameter Name="ChocolateShipping_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="ChocolateShipping_LowKey" DefaultValue="0" />
+    <Parameter Name="ChocolateShipping_HighKey" DefaultValue="99000" />
     <Parameter Name="ChocolateOrder_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="ChocolateOrder_PartitionCount" DefaultValue="1" />
     <Parameter Name="ChocolateOrder_TargetReplicaSetSize" DefaultValue="3" />
@@ -37,7 +39,7 @@
     </Service>
     <Service Name="ChocolateShipping">
       <StatefulService ServiceTypeName="ChocolateShippingType" TargetReplicaSetSize="[ChocolateShipping_TargetReplicaSetSize]" MinReplicaSetSize="[ChocolateShipping_MinReplicaSetSize]">
-        <UniformInt64Partition PartitionCount="[ChocolateShipping_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+        <UniformInt64Partition PartitionCount="[ChocolateShipping_PartitionCount]" LowKey="[ChocolateShipping_LowKey]" HighKey="[ChocolateShipping_HighKey]" />
       </StatefulService>
     </Service>
     <Service Name="ChocolateOrder">

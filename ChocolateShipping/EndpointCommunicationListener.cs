@@ -2,12 +2,11 @@
 using System.Fabric;
 using System.Threading;
 using System.Threading.Tasks;
-using Contracts;
 using Microsoft.ServiceFabric.Data;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using NServiceBus;
 
-namespace ChocolateOrder
+namespace ChocolateShipping
 {
     public class EndpointCommunicationListener :
         ICommunicationListener
@@ -33,19 +32,16 @@ namespace ChocolateOrder
                 .QueryServicePartitions(context.ServiceName, context.PartitionId)
                 .ConfigureAwait(false);
 
-            endpointConfiguration = new EndpointConfiguration("chocolateorder");
+            endpointConfiguration = new EndpointConfiguration("chocolateshipping");
 
             var transport = endpointConfiguration.ApplyCommonConfiguration(stateManager, servicePartitionInformation);
 
-            var routing = transport.Routing();
-            routing.RouteToEndpoint(typeof(ShipOrder), "chocolateshipping");
-
-            ConfigureLocalPartitionsChocolateOrder(endpointConfiguration, partitionInfo);
+            ConfigureLocalPartitionsChocolateShipping(endpointConfiguration, partitionInfo);
 
             return null;
         }
 
-        static void ConfigureLocalPartitionsChocolateOrder(EndpointConfiguration endpointConfiguration,
+        static void ConfigureLocalPartitionsChocolateShipping(EndpointConfiguration endpointConfiguration,
             PartitionsInformation partitionInfo)
         {
             endpointConfiguration.RegisterPartitionsForThisEndpoint(

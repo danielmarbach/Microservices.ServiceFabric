@@ -9,6 +9,7 @@ namespace ChocolateOrder
     public class OrderProcessManager : Saga<OrderProcessManager.OrderProcessData>
         , IAmStartedByMessages<OrderChocolate>,
         IHandleMessages<PaymentResponse>,
+        IHandleMessages<OrderShipped>,
         IHandleTimeouts<OrderProcessManager.BuyersRemorsePeriodOver>
     {
         static Random random = new Random();
@@ -42,8 +43,15 @@ namespace ChocolateOrder
         {
             Logger.Log($"OrderProcessManager: Order {Data.OrderId} and type {Data.ChocolateType} on partition { PartitionInformation.Name } was payed.");
 
+            return context.Send(new ShipOrder { OrderId = Data.OrderId });
+        }
+
+        public Task Handle(OrderShipped message, IMessageHandlerContext context)
+        {
+            Logger.Log($"OrderProcessManager: Order {Data.OrderId} and type {Data.ChocolateType} on partition { PartitionInformation.Name } done.");
+
+            MarkAsComplete();
             return Task.CompletedTask;
-            //return context.Send(new ShipOrder { OrderId = Data.OrderId });
         }
 
         public class OrderProcessData :

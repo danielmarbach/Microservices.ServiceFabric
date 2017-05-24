@@ -26,6 +26,7 @@ namespace ChocolateOrder.Front
             transport.ConnectionString(connectionString);
             transport.UseForwardingTopology();
 
+            // here hardcoded but could be retrieved from fabric client as long as running inside the cluster
             var remotePartitions = new[] { "Dark", "Brown", "White" };
 
             var routing = transport.Routing();

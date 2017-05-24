@@ -6,5 +6,7 @@ namespace Contracts
     public class ShipOrder : ICommand
     {
         public Guid OrderId { get; set; }
+
+        public string ZipCode { get; set; }
     }
 }

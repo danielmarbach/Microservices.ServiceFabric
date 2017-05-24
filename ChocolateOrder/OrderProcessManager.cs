@@ -13,11 +13,12 @@ namespace ChocolateOrder
         IHandleTimeouts<OrderProcessManager.BuyersRemorsePeriodOver>
     {
         static Random random = new Random();
+        
 
         protected override void ConfigureHowToFindSaga(SagaPropertyMapper<OrderProcessData> mapper)
         {
-            mapper.ConfigureMapping<OrderChocolate>(m => m.OrderId)
-                .ToSaga(s => s.OrderId);
+            mapper.ConfigureMapping<OrderChocolate>(m => m.OrderId).ToSaga(s => s.OrderId);
+            mapper.ConfigureMapping<OrderShipped>(m => m.OrderId).ToSaga(s => s.OrderId);
         }
 
         public NamedPartitionInformation PartitionInformation { get; set; }
@@ -43,7 +44,8 @@ namespace ChocolateOrder
         {
             Logger.Log($"OrderProcessManager: Order {Data.OrderId} and type {Data.ChocolateType} on partition { PartitionInformation.Name } was payed.");
 
-            return context.Send(new ShipOrder { OrderId = Data.OrderId });
+            var zipcode = random.Next(0, 99001).ToString("d5");
+            return context.Send(new ShipOrder { OrderId = Data.OrderId, ZipCode = zipcode });
         }
 
         public Task Handle(OrderShipped message, IMessageHandlerContext context)

@@ -3,7 +3,7 @@ using NServiceBus;
 
 namespace Contracts
 {
-    public class PayementResponse : IMessage
+    public class PaymentResponse : IMessage
     {
         public Guid OrderId { get; }
     }

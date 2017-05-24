@@ -8,7 +8,7 @@ namespace ChocolateOrder
 {
     public class OrderProcessManager : Saga<OrderProcessManager.OrderProcessData>
         , IAmStartedByMessages<OrderChocolate>,
-        IHandleMessages<PayementResponse>,
+        IHandleMessages<PaymentResponse>,
         IHandleTimeouts<OrderProcessManager.BuyersRemorsePeriodOver>
     {
         static Random random = new Random();
@@ -38,7 +38,7 @@ namespace ChocolateOrder
             await context.SendLocal(new MakePayment { ChocolateType = Data.ChocolateType, OrderId = Data.OrderId, Amount = random.Next(1, 100) * new decimal(2.25)});
         }
 
-        public Task Handle(PayementResponse message, IMessageHandlerContext context)
+        public Task Handle(PaymentResponse message, IMessageHandlerContext context)
         {
             Logger.Log($"OrderProcessManager: Order {Data.OrderId} and type {Data.ChocolateType} on partition { PartitionInformation.Name } was payed.");
 

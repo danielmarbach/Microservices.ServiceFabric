@@ -1,16 +1,30 @@
 ﻿using System;
+using System.Fabric;
 using Microsoft.ServiceFabric.Data;
 using NServiceBus;
 
 public static class EndpointConfigurationExtensions
 {
-    public static TransportExtensions<AzureServiceBusTransport> ApplyCommonConfiguration(this EndpointConfiguration endpointConfiguration, IReliableStateManager stateManager)
+    public static TransportExtensions<AzureServiceBusTransport> ApplyCommonConfiguration(this EndpointConfiguration endpointConfiguration, IReliableStateManager stateManager, ServicePartitionInformation partitionInformation)
     {
         endpointConfiguration.SendFailedMessagesTo("error");
         endpointConfiguration.AuditProcessedMessagesTo("audit");
         endpointConfiguration.UseSerialization<JsonSerializer>();
         endpointConfiguration.EnableInstallers();
         endpointConfiguration.UsePersistence<InMemoryPersistence>();
+
+        var instance = partitionInformation as NamedPartitionInformation;
+        if (instance != null)
+        {
+            endpointConfiguration.RegisterComponents(c => c.RegisterSingleton(instance));
+        }
+
+        var information = partitionInformation as Int64RangePartitionInformation;
+        if (information != null)
+        {
+            endpointConfiguration.RegisterComponents(c => c.RegisterSingleton(information));
+        }
+        
         //var persistence = endpointConfiguration.UsePersistence<ServiceFabricPersistence>();
         //persistence.StateManager(stateManager);
 

@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="EndpointCommunicationListener.cs" />
     <Compile Include="OrderProcessManager.cs" />
+    <Compile Include="PayementGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ChocolateOrder.cs" />
     <Compile Include="Program.cs" />

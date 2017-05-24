@@ -17,8 +17,8 @@ namespace ChocolateOrder
         }
 
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
-        {
-            listener = new EndpointCommunicationListener(Context, StateManager);
+        {            
+            listener = new EndpointCommunicationListener(Context, StateManager, Partition.PartitionInfo);
             return new List<ServiceReplicaListener>
             {
                 new ServiceReplicaListener(context => listener)

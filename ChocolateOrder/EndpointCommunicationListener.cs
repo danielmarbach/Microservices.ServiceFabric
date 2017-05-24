@@ -15,9 +15,11 @@ namespace ChocolateOrder
         IReliableStateManager stateManager;
         IEndpointInstance endpointInstance;
         EndpointConfiguration endpointConfiguration;
+        private ServicePartitionInformation servicePartitionInformation;
 
-        public EndpointCommunicationListener(StatefulServiceContext context, IReliableStateManager stateManager)
+        public EndpointCommunicationListener(StatefulServiceContext context, IReliableStateManager stateManager, ServicePartitionInformation partitionPartitionInfo)
         {
+            servicePartitionInformation = partitionPartitionInfo;
             this.context = context;
             this.stateManager = stateManager;
         }
@@ -32,7 +34,7 @@ namespace ChocolateOrder
 
             endpointConfiguration = new EndpointConfiguration("chocolateorder");
 
-            var transport = endpointConfiguration.ApplyCommonConfiguration(stateManager);
+            var transport = endpointConfiguration.ApplyCommonConfiguration(stateManager, servicePartitionInformation);
 
             ConfigureLocalPartitionsChocolateOrder(endpointConfiguration, partitionInfo);
 

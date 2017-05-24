@@ -3,5 +3,28 @@
 }
 
 <div class="row">
-  
+    <div class="col-md-4">
+        @using (Html.BeginForm("Dark", "Home", FormMethod.Post))
+        {
+            <button type="submit" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Dark chocolate
+            </button>
+        }
+    </div> 
+    <div class="col-md-4">
+        @using (Html.BeginForm("Brown", "Home", FormMethod.Post))
+        {
+            <button type="submit" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Brown chocolate
+            </button>
+        }
+    </div>
+    <div class="col-md-4">
+        @using (Html.BeginForm("White", "Home", FormMethod.Post))
+        {
+            <button type="submit" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> White chocolate
+            </button>
+        }
+    </div>
 </div>

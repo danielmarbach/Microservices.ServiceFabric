@@ -1,4 +1,5 @@
 using System;
+using Contracts;
 using Microsoft.Extensions.DependencyInjection;
 using NServiceBus;
 
@@ -24,6 +25,19 @@ namespace ChocolateOrder.Front
             }
             transport.ConnectionString(connectionString);
             transport.UseForwardingTopology();
+
+            var remotePartitions = new[] { "Dark", "Brown", "White" };
+
+            var routing = transport.Routing();
+            var distribution = routing.RegisterPartitionedDestinationEndpoint(
+                destinationEndpoint: "chocolateorder",
+                partitions: remotePartitions);
+
+            distribution.AddPartitionMappingForMessageType<OrderChocolate>(
+                mapMessageToPartitionKey: message =>
+                {
+                    return message.ChocolateType;
+                });
 
             var endpointInstance = Endpoint.Start(endpointConfiguration).GetAwaiter().GetResult();
             services.AddSingleton<IMessageSession>(endpointInstance);

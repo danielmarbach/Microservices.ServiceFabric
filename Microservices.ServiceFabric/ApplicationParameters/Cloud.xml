@@ -5,8 +5,7 @@
     <Parameter Name="ChocolateShipping_PartitionCount" Value="1" />
     <Parameter Name="ChocolateShipping_MinReplicaSetSize" Value="3" />
     <Parameter Name="ChocolateShipping_TargetReplicaSetSize" Value="3" />
-    <Parameter Name="ChocolateOrder_PartitionCount" Value="1" />
-    <Parameter Name="ChocolateOrder_MinReplicaSetSize" Value="3" />
+    <Parameter Name="ChocolateOrder_MinReplicaSetSize" Value="2" />
     <Parameter Name="ChocolateOrder_TargetReplicaSetSize" Value="3" />
   </Parameters>
 </Application>

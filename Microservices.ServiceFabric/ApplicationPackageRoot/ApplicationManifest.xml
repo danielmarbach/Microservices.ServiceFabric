@@ -42,7 +42,11 @@
     </Service>
     <Service Name="ChocolateOrder">
       <StatefulService ServiceTypeName="ChocolateOrderType" TargetReplicaSetSize="[ChocolateOrder_TargetReplicaSetSize]" MinReplicaSetSize="[ChocolateOrder_MinReplicaSetSize]">
-        <UniformInt64Partition PartitionCount="[ChocolateOrder_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+        <NamedPartition>
+          <Partition Name="Dark" />
+          <Partition Name="Brown" />
+          <Partition Name="White" />
+        </NamedPartition>
       </StatefulService>
     </Service>
   </DefaultServices>

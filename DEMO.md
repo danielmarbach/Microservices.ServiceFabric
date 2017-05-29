@@ -22,3 +22,5 @@
 
 # Demo 2
 
+- Open up View>Other Windows>Diagnostic Event
+- Open up http://localhost:8147/

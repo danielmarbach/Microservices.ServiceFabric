@@ -2,6 +2,7 @@
 using System.Fabric;
 using Microsoft.ServiceFabric.Data;
 using NServiceBus;
+using NServiceBus.Persistence.ServiceFabric;
 
 public static class EndpointConfigurationExtensions
 {
@@ -11,7 +12,6 @@ public static class EndpointConfigurationExtensions
         endpointConfiguration.AuditProcessedMessagesTo("audit");
         endpointConfiguration.UseSerialization<JsonSerializer>();
         endpointConfiguration.EnableInstallers();
-        endpointConfiguration.UsePersistence<InMemoryPersistence>();
 
         var instance = partitionInformation as NamedPartitionInformation;
         if (instance != null)
@@ -24,12 +24,15 @@ public static class EndpointConfigurationExtensions
         {
             endpointConfiguration.RegisterComponents(c => c.RegisterSingleton(information));
         }
-        
-        //var persistence = endpointConfiguration.UsePersistence<ServiceFabricPersistence>();
-        //persistence.StateManager(stateManager);
+
+        var persistence = endpointConfiguration.UsePersistence<ServiceFabricPersistence>();
+        persistence.StateManager(stateManager);
 
         var recoverability = endpointConfiguration.Recoverability();
         recoverability.DisableLegacyRetriesSatellite();
+        // for demo purposes
+        recoverability.Immediate(d => d.NumberOfRetries(0));
+        recoverability.Delayed(d => d.NumberOfRetries(0));
 
         var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
         var connectionString = Environment.GetEnvironmentVariable("AzureServiceBus.ConnectionString");

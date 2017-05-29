@@ -3,9 +3,11 @@ using System.Fabric;
 using System.Threading.Tasks;
 using Contracts;
 using NServiceBus;
+using NServiceBus.Persistence.ServiceFabric;
 
 namespace ChocolateOrder
 {
+    [ServiceFabricSaga(CollectionName = "orders")]
     public class OrderProcessManager : Saga<OrderProcessManager.OrderProcessData>
         , IAmStartedByMessages<OrderChocolate>,
         IHandleMessages<PaymentResponse>,

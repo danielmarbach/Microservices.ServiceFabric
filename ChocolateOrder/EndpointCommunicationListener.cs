@@ -4,8 +4,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Contracts;
 using Microsoft.ServiceFabric.Data;
+using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using NServiceBus;
+using NServiceBus.Persistence.ServiceFabric;
 
 namespace ChocolateOrder
 {
@@ -75,6 +77,14 @@ namespace ChocolateOrder
 
                 Logger.Log(message);
                 throw new Exception(message);
+            }
+
+            var orderProcesses = await stateManager.TryGetAsync<IReliableDictionary<Guid, SagaEntry>>("orders")
+                .ConfigureAwait(false);
+            if (orderProcesses.HasValue)
+            {
+                await orderProcesses.Value.ClearAsync()
+                    .ConfigureAwait(false);
             }
 
             endpointInstance = await Endpoint.Start(endpointConfiguration)

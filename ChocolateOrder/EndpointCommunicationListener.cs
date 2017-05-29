@@ -61,8 +61,8 @@ namespace ChocolateOrder
             receiverSideDistribution.AddPartitionMappingForMessageType<OrderShipped>(
                 mapMessageToPartitionKey: orderShipped =>
                 {
-                    OrderId orderId = orderShipped.OrderId;
-                    return orderId.ChocolateType;
+                    var chocolateType = orderShipped.OrderId.Split(new[]{ ";" }, StringSplitOptions.RemoveEmptyEntries)[0];
+                    return chocolateType;
                 });
         }
 

@@ -4,13 +4,7 @@ namespace Contracts
 {
     public class OrderChocolate : ICommand
     {
-        public OrderChocolate(string chocolateType)
-        {
-            OrderId = new OrderId(chocolateType);
-            ChocolateType = chocolateType;
-        }
-
-        public string ChocolateType { get; }
-        public string OrderId { get; }
+        public string ChocolateType { get; set; }
+        public string OrderId { get; set; }
     }
 }

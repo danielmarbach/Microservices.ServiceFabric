@@ -22,9 +22,13 @@ public class PartitionAwareDistributionStrategy :
     {
         var discriminator = mapper(context.Message.Instance);
 
+
         context.Headers[PartitionHeaders.PartitionKey] = discriminator;
 
         var remoteAddress = context.ToTransportAddress(new EndpointInstance(Endpoint, discriminator));
+
+        Logger.Log($"::SSD:: Sending message of type {context.Message.MessageType} with partition key={discriminator} to queue {remoteAddress}.");
+
         return context.ReceiverAddresses.Single(a => a == remoteAddress);
     }
 }

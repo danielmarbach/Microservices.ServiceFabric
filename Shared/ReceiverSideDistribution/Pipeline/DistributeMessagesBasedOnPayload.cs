@@ -41,14 +41,13 @@ class DistributeMessagesBasedOnPayload :
             throw new PartitionMappingFailedException($"Could not map a partition key for message of type {context.Headers[Headers.EnclosedMessageTypes]}");
         }
 
-        var message = $"##### Received message: {context.Headers[Headers.EnclosedMessageTypes]} with Mapped PartitionKey={messagePartitionKey} on partition {localPartitionKey}";
-
-        Logger.Log(message);
-
         if (messagePartitionKey == localPartitionKey)
         {
+            Logger.Log($"::RSD:: Received message: {context.Headers[Headers.EnclosedMessageTypes]} with Mapped PartitionKey={messagePartitionKey} on partition {localPartitionKey}");
             return next(context);
         }
+
+        Logger.Log($"::RSD:: Forwarding received message: {context.Headers[Headers.EnclosedMessageTypes]} with Mapped PartitionKey={messagePartitionKey} on partition {localPartitionKey} to partition {messagePartitionKey}");
 
         context.Headers[PartitionHeaders.PartitionKey] = messagePartitionKey;
 

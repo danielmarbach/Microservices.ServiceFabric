@@ -34,12 +34,11 @@ class DistributeMessagesBasedOnHeader :
         // 2. The header value matches local partition key
         if (!hasPartitionKeyHeader || messagePartitionKey == localPartitionKey)
         {
+            Logger.Log($"::RSD:: Received message: {context.Message.Headers[Headers.EnclosedMessageTypes]} with Mapped PartitionKey={messagePartitionKey} on partition {localPartitionKey}");
             return next(context);
         }
 
-        var message = $"##### Received message: {context.Message.Headers[Headers.EnclosedMessageTypes]} with Mapped PartitionKey={messagePartitionKey} on partition {localPartitionKey}";
-
-        Logger.Log(message);
+        Logger.Log($"::RSD:: Forwarding received message: {context.Message.Headers[Headers.EnclosedMessageTypes]} with Mapped PartitionKey={messagePartitionKey} on partition {localPartitionKey} to partition {messagePartitionKey}.");
 
         return forwarder.Forward(context, messagePartitionKey);
     }

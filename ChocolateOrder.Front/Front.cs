@@ -33,6 +33,7 @@ namespace ChocolateOrder.Front
                 new ServiceInstanceListener(serviceContext =>
                     new WebListenerCommunicationListener(serviceContext, "ServiceEndpoint", (url, listener) =>
                     {
+                        Logger.Log = m => ServiceEventSource.Current.ServiceMessage(serviceContext, m);
                         ServiceEventSource.Current.ServiceMessage(serviceContext, $"Starting WebListener on {url}");
 
                         return new WebHostBuilder().UseWebListener()

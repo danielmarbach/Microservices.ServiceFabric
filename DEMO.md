@@ -3,6 +3,7 @@
 - Start VS under Admin mode ChaosTestApplication
   - Build Release and Deploy to the local cluster
 - Start another VS under Admin mode
+- System wide Environment variable called `AzureServiceBus.ConnectionString` with a valid ASB connection string.
 
 # Demo 1
 
@@ -18,3 +19,6 @@
   - Show cluster manager and how one instance is deployed on all available nodes
   - Show Diagnostics windows and how the service instances are working
 - Switch to http://localhost:8081/chaostest/ and let the chaos test run, show dashboard with update refresh count fast how service heals itself
+
+# Demo 2
+

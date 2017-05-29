@@ -72,6 +72,7 @@
     <Compile Include="ChocolateOrdered.cs" />
     <Compile Include="MakePayment.cs" />
     <Compile Include="OrderChocolate.cs" />
+    <Compile Include="OrderId.cs" />
     <Compile Include="OrderShipped.cs" />
     <Compile Include="PaymentResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

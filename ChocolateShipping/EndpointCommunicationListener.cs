@@ -81,6 +81,7 @@ namespace ChocolateShipping
             #endregion
         }
 
+        #region NotImportant
         public async Task Run()
         {
             if (endpointConfiguration == null)
@@ -106,5 +107,6 @@ namespace ChocolateShipping
             // Fire & Forget Close
             CloseAsync(CancellationToken.None);
         }
+        #endregion
     }
 }

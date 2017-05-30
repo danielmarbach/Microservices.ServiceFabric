@@ -67,7 +67,7 @@ namespace ChocolateOrder
                     return chocolateType;
                 });
         }
-
+        #region NotImportant
         public async Task Run()
         {
             if (endpointConfiguration == null)
@@ -101,5 +101,6 @@ namespace ChocolateOrder
             // Fire & Forget Close
             CloseAsync(CancellationToken.None);
         }
+        #endregion
     }
 }

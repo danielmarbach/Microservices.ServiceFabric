@@ -1,5 +1,6 @@
 # Preparations
 
+- Start local dev cluster
 - Start VS under Admin mode ChaosTestApplication
   - Build Release and Deploy to the local cluster
 - Start another VS under Admin mode

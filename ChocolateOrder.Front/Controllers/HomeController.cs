@@ -23,34 +23,31 @@ namespace ChocolateOrder.Front.Controllers
         [HttpPost]
         public async Task<IActionResult> Dark()
         {
-            await messageSession.Send(new OrderChocolate
-            {
-                OrderId = $"Dark;{Guid.NewGuid()}",
-                ChocolateType = "Dark"
-            });
+            await OrderChocolate("Dark");
             return View("Index");
         }
 
         [HttpPost]
         public async Task<IActionResult> Brown()
         {
-            await messageSession.Send(new OrderChocolate
-            {
-                OrderId = $"Brown;{Guid.NewGuid()}",
-                ChocolateType = "Brown"
-            });
+            await OrderChocolate("Brown");
             return View("Index");
         }
 
         [HttpPost]
         public async Task<IActionResult> White()
         {
+            await OrderChocolate("White");
+            return View("Index");
+        }
+
+        private async Task OrderChocolate(string chocolateType)
+        {
             await messageSession.Send(new OrderChocolate
             {
-                OrderId = $"White;{Guid.NewGuid()}",
-                ChocolateType = "White"
+                OrderId = $"{chocolateType};{Guid.NewGuid()}",
+                ChocolateType = chocolateType
             });
-            return View("Index");
         }
 
         public IActionResult Error()

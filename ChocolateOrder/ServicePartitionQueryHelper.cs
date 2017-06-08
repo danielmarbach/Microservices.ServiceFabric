@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 public static class ServicePartitionQueryHelper
 {
-    public static async Task<PartitionsInformation> QueryServicePartitions(Uri serviceName, Guid partitionId)
+    public static async Task<PartitionsInformation> QueryServicePartitions(Uri serviceName, Guid? partitionId = null)
     {
         using (var client = new FabricClient())
         {
@@ -22,11 +22,11 @@ public static class ServicePartitionQueryHelper
 
             var partitionInformation = new PartitionsInformation
             {
-                LocalPartitionKey = partitionInformations.Single(p => p.PartitionId == partitionId).PartitionKey,
+                LocalPartitionKey = partitionInformations.SingleOrDefault(p => p.PartitionId == partitionId)?.PartitionKey,
                 Partitions = partitionInformations.Select(p => p.PartitionKey).ToArray()
             };
 
-            Logger.Log($"{serviceName} under partition {partitionId} uses { partitionInformation.LocalPartitionKey }. {Environment.NewLine}Found partitions: {string.Join("; ", partitionInformation.Partitions)}");
+            Logger.Log($"{serviceName} under partition {partitionId} uses { partitionInformation.LocalPartitionKey }. Found partitions: {string.Join("; ", partitionInformation.Partitions)}");
             
             return partitionInformation;
         }

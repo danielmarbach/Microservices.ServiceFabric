@@ -1,4 +1,5 @@
 using System;
+using System.Fabric;
 using Contracts;
 using Microsoft.Extensions.DependencyInjection;
 using NServiceBus;
@@ -26,19 +27,17 @@ namespace ChocolateOrder.Front
             transport.ConnectionString(connectionString);
             transport.UseForwardingTopology();
 
-            // here hardcoded but could be retrieved from fabric client as long as running inside the cluster
-            var remotePartitions = new[] { "Dark", "Brown", "White" };
+            // let's query the remote service
+            var chocolateOrderPartitionInformation = ServicePartitionQueryHelper
+                .QueryServicePartitions(new Uri("fabric:/Microservices.ServiceFabric/ChocolateOrder")).GetAwaiter().GetResult();
 
             var routing = transport.Routing();
             var distribution = routing.RegisterPartitionedDestinationEndpoint(
                 destinationEndpoint: "chocolateorder",
-                partitions: remotePartitions);
+                partitions: chocolateOrderPartitionInformation.Partitions);
 
             distribution.AddPartitionMappingForMessageType<OrderChocolate>(
-                mapMessageToPartitionKey: message =>
-                {
-                    return message.ChocolateType;
-                });
+                mapMessageToPartitionKey: message => message.ChocolateType);
 
             var endpointInstance = Endpoint.Start(endpointConfiguration).GetAwaiter().GetResult();
             services.AddSingleton<IMessageSession>(endpointInstance);

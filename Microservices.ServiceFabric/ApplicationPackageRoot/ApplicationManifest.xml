@@ -8,7 +8,6 @@
     <Parameter Name="ChocolateShipping_LowKey" DefaultValue="0" />
     <Parameter Name="ChocolateShipping_HighKey" DefaultValue="99000" />
     <Parameter Name="ChocolateOrder_MinReplicaSetSize" DefaultValue="3" />
-    <Parameter Name="ChocolateOrder_PartitionCount" DefaultValue="1" />
     <Parameter Name="ChocolateOrder_TargetReplicaSetSize" DefaultValue="3" />
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 

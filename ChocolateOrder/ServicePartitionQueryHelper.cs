@@ -20,11 +20,15 @@ public static class ServicePartitionQueryHelper
                     PartitionId = x.PartitionInformation.Id
                 }).ToList();
 
-            return new PartitionsInformation
+            var partitionInformation = new PartitionsInformation
             {
                 LocalPartitionKey = partitionInformations.Single(p => p.PartitionId == partitionId).PartitionKey,
                 Partitions = partitionInformations.Select(p => p.PartitionKey).ToArray()
             };
+
+            Logger.Log($"{serviceName} under partition {partitionId} uses { partitionInformation.LocalPartitionKey }. {Environment.NewLine}Found partitions: {string.Join("; ", partitionInformation.Partitions)}");
+            
+            return partitionInformation;
         }
     }
 }

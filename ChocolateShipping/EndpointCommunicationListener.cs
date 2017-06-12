@@ -52,10 +52,8 @@ namespace ChocolateShipping
                 allPartitionKeys: partitionInfo.Partitions);
         }
 
-        static void ConfigureReceiverSideDistributionShipOrder(TransportExtensions<AzureServiceBusTransport> transportConfig, PartitionsInformation partitionInfo)
+        static void ConfigureReceiverSideDistributionShipOrder(TransportExtensions transportConfig, PartitionsInformation partitionInfo)
         {
-            #region ConfigureReceiverSideDistribution-CandidateVoteCount
-
             var partitionKeysAsInts = partitionInfo.Partitions.Select(i => new { Key = i, AsInt = Convert.ToInt32(i) }).OrderBy(i => i.AsInt);
 
             var routing = transportConfig.Routing();
@@ -77,8 +75,6 @@ namespace ChocolateShipping
                     }
                     throw new Exception($"Invalid zip code '{zipCodeAsNumber}' for message of type '{shipOrder.GetType()}'.");
                 });
-
-            #endregion
         }
 
         #region NotImportant

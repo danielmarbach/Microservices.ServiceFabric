@@ -6,7 +6,7 @@ using NServiceBus.Persistence.ServiceFabric;
 
 public static class EndpointConfigurationExtensions
 {
-    public static TransportExtensions<AzureServiceBusTransport> ApplyCommonConfiguration(this EndpointConfiguration endpointConfiguration, IReliableStateManager stateManager, ServicePartitionInformation partitionInformation)
+    public static TransportExtensions ApplyCommonConfiguration(this EndpointConfiguration endpointConfiguration, IReliableStateManager stateManager, ServicePartitionInformation partitionInformation)
     {
         endpointConfiguration.SendFailedMessagesTo("error");
         endpointConfiguration.AuditProcessedMessagesTo("audit");

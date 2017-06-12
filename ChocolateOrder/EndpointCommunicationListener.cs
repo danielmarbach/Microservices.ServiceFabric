@@ -56,7 +56,7 @@ namespace ChocolateOrder
                 allPartitionKeys: partitionInfo.Partitions);
         }
 
-        static void ConfigureReceiverSideDistributionOrderShipped(TransportExtensions<AzureServiceBusTransport> transportConfig, PartitionsInformation partitionInfo)
+        static void ConfigureReceiverSideDistributionOrderShipped(TransportExtensions transportConfig, PartitionsInformation partitionInfo)
         {
             var routing = transportConfig.Routing();
             var receiverSideDistribution = routing.EnableReceiverSideDistribution(partitionInfo.Partitions);

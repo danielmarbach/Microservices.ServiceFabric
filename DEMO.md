@@ -25,3 +25,21 @@
 
 - Open up View>Other Windows>Diagnostic Event
 - Open up http://localhost:8147/
+
+## With rabbit
+
+Install NServiceBus.RabbitMQ in all proj except Contracts and Application.
+
+Change:
+
+- Shared `ApplyCommonConfiguration`
+- FrontEnd `AddNServiceBus`
+
+```
+        var connectionString = "host=localhost";
+        transport.ConnectionString(connectionString);
+        var delayedDelivery = transport.DelayedDelivery();
+        delayedDelivery.DisableTimeoutManager();
+```
+
+http://localhost:15672/

@@ -9,5 +9,6 @@
     <Parameter Name="ChocolateShipping_TargetReplicaSetSize" Value="3" />
     <Parameter Name="ChocolateOrder_MinReplicaSetSize" Value="2" />
     <Parameter Name="ChocolateOrder_TargetReplicaSetSize" Value="3" />
+    <Parameter Name="NServiceBus_ConnectionString" Value="ENTERCONNECTIONSTRING" />
   </Parameters>
 </Application>

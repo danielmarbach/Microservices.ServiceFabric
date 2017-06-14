@@ -18,13 +18,18 @@ namespace ChocolateOrder.Front
             endpointConfiguration.UsePersistence<InMemoryPersistence>();
             endpointConfiguration.SendOnly();
 
+            var provider = services.BuildServiceProvider();
+            var context = provider.GetService<StatelessServiceContext>();
+            var configurationPackage = context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
+
+            var connectionString = configurationPackage.Settings.Sections["NServiceBus"].Parameters["ConnectionString"];
+
             var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
-            var connectionString = Environment.GetEnvironmentVariable("AzureServiceBus.ConnectionString");
-            if (string.IsNullOrWhiteSpace(connectionString))
+            if (string.IsNullOrWhiteSpace(connectionString.Value))
             {
-                throw new Exception("Could not read the 'AzureServiceBus.ConnectionString' environment variable. Check the sample prerequisites.");
+                throw new Exception("Could not read the 'NServiceBus.ConnectionString' environment variable. Check the sample prerequisites.");
             }
-            transport.ConnectionString(connectionString);
+            transport.ConnectionString(connectionString.Value);
             transport.UseForwardingTopology();
 
             // let's query the remote service

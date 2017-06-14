@@ -36,7 +36,7 @@ namespace ChocolateShipping
 
             endpointConfiguration = new EndpointConfiguration("chocolateshipping");
 
-            var transport = endpointConfiguration.ApplyCommonConfiguration(stateManager, servicePartitionInformation);
+            var transport = endpointConfiguration.ApplyCommonConfiguration(stateManager, servicePartitionInformation, context);
 
             ConfigureLocalPartitionsChocolateShipping(endpointConfiguration, partitionInfo);
             ConfigureReceiverSideDistributionShipOrder(transport, partitionInfo);

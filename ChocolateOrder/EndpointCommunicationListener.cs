@@ -37,7 +37,7 @@ namespace ChocolateOrder
 
             endpointConfiguration = new EndpointConfiguration("chocolateorder");
 
-            var transport = endpointConfiguration.ApplyCommonConfiguration(stateManager, servicePartitionInformation);
+            var transport = endpointConfiguration.ApplyCommonConfiguration(stateManager, servicePartitionInformation, context);
 
             var routing = transport.Routing();
             routing.RouteToEndpoint(typeof(ShipOrder), "chocolateshipping");

@@ -6,7 +6,7 @@ using NServiceBus.Persistence.ServiceFabric;
 
 public static class EndpointConfigurationExtensions
 {
-    public static TransportExtensions ApplyCommonConfiguration(this EndpointConfiguration endpointConfiguration, IReliableStateManager stateManager, ServicePartitionInformation partitionInformation)
+    public static TransportExtensions ApplyCommonConfiguration(this EndpointConfiguration endpointConfiguration, IReliableStateManager stateManager, ServicePartitionInformation partitionInformation, StatefulServiceContext context)
     {
         endpointConfiguration.SendFailedMessagesTo("error");
         endpointConfiguration.AuditProcessedMessagesTo("audit");
@@ -34,13 +34,16 @@ public static class EndpointConfigurationExtensions
         recoverability.Immediate(d => d.NumberOfRetries(0));
         recoverability.Delayed(d => d.NumberOfRetries(0));
 
+        var configurationPackage = context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
+
+        var connectionString = configurationPackage.Settings.Sections["NServiceBus"].Parameters["ConnectionString"];
+
         var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
-        var connectionString = Environment.GetEnvironmentVariable("AzureServiceBus.ConnectionString");
-        if (string.IsNullOrWhiteSpace(connectionString))
+        if (string.IsNullOrWhiteSpace(connectionString.Value))
         {
-            throw new Exception("Could not read the 'AzureServiceBus.ConnectionString' environment variable. Check the sample prerequisites.");
+            throw new Exception("Could not read the 'NServiceBus.ConnectionString'. Check the sample prerequisites.");
         }
-        transport.ConnectionString(connectionString);
+        transport.ConnectionString(connectionString.Value);
         transport.UseForwardingTopology();
 
         return transport;

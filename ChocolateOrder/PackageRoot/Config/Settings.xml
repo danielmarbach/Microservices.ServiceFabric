@@ -7,10 +7,7 @@
   <!-- This is used for securing StateManager's replication traffic. -->
   <Section Name="ReplicatorSecurityConfig" />
 
-  <!-- Add your custom configuration sections and parameters here. -->
-  <!--
-  <Section Name="MyConfigSection">
-    <Parameter Name="MyParameter" Value="Value1" />
+  <Section Name="NServiceBus">
+    <Parameter Name="ConnectionString" Value="" />
   </Section>
-  -->
 </Settings>

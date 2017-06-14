@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="fabric:/Microservices.ServiceFabric" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
-    <Parameter Name="Front_InstanceCount" Value="-1" />
+    <Parameter Name="Front_InstanceCount" Value="1" />
     <Parameter Name="ChocolateShipping_PartitionCount" Value="3" />
     <Parameter Name="ChocolateShipping_LowKey" Value="0" />
     <Parameter Name="ChocolateShipping_HighKey" Value="99000" />

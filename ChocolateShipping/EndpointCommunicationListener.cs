@@ -54,6 +54,7 @@ namespace ChocolateShipping
 
         static void ConfigureReceiverSideDistributionShipOrder(TransportExtensions transportConfig, PartitionsInformation partitionInfo)
         {
+            // TODO 11
             var partitionKeysAsInts = partitionInfo.Partitions.Select(i => new { Key = i, AsInt = Convert.ToInt32(i) }).OrderBy(i => i.AsInt);
 
             var routing = transportConfig.Routing();

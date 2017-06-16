@@ -23,6 +23,7 @@ namespace ChocolateOrder.Front.Controllers
         [HttpPost]
         public async Task<IActionResult> Dark()
         {
+            // TODO 1
             await OrderChocolate("Dark");
             return View("Index");
         }
@@ -45,7 +46,7 @@ namespace ChocolateOrder.Front.Controllers
         {
             await messageSession.Send(new OrderChocolate
             {
-                OrderId = $"{chocolateType};{Guid.NewGuid()}",
+                OrderId = $"{chocolateType};{Guid.NewGuid()}", // combined order id
                 ChocolateType = chocolateType
             });
         }

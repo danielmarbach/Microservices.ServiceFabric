@@ -7,9 +7,10 @@ using NServiceBus.Persistence.ServiceFabric;
 
 namespace ChocolateOrder
 {
+    // TODO 3
     [ServiceFabricSaga(CollectionName = "orders")]
     public class OrderProcessManager : Saga<OrderProcessManager.OrderProcessData>
-        , IAmStartedByMessages<OrderChocolate>,
+        , IAmStartedByMessages<OrderChocolate>, // TODO 2
         IHandleMessages<PaymentResponse>,
         IHandleMessages<OrderShipped>,
         IHandleTimeouts<OrderProcessManager.BuyersRemorsePeriodOver>
@@ -25,6 +26,7 @@ namespace ChocolateOrder
 
         public NamedPartitionInformation PartitionInformation { get; set; }
 
+        // TODO 4
         public Task Handle(OrderChocolate message, IMessageHandlerContext context)
         {
             Data.ChocolateType = message.ChocolateType;
@@ -38,6 +40,7 @@ namespace ChocolateOrder
         {
             Logger.Log($"OrderProcessManager: Order {Data.OrderId} and type {Data.ChocolateType} on partition { PartitionInformation.Name } buyers remorse period over.");
 
+            // TODO 5
             await context.Publish(new ChocolateOrdered { ChocolateType = Data.ChocolateType, OrderId = Data.OrderId });
             await context.SendLocal(new MakePayment { ChocolateType = Data.ChocolateType, OrderId = Data.OrderId, Amount = random.Next(1, 100) * new decimal(2.25)});
         }
@@ -46,6 +49,7 @@ namespace ChocolateOrder
         {
             Logger.Log($"OrderProcessManager: Order {Data.OrderId} and type {Data.ChocolateType} on partition { PartitionInformation.Name } was payed.");
 
+            // TODO 7
             var zipcode = random.Next(0, 99001).ToString("d5");
             return context.Send(new ShipOrder { OrderId = Data.OrderId, ZipCode = zipcode });
         }

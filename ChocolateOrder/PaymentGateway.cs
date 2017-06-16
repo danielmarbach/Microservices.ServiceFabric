@@ -9,6 +9,7 @@ namespace ChocolateOrder
     {
         public NamedPartitionInformation PartitionInformation { get; set; }
 
+        // TODO 6
         public async Task Handle(MakePayment message, IMessageHandlerContext context)
         {
             Logger.Log($"PaymentGateway: Paying {message.OrderId} with amount {message.Amount} and type {message.ChocolateType} on partition { PartitionInformation.Name }.");

@@ -33,6 +33,7 @@ namespace ChocolateOrder.Front
             transport.UseForwardingTopology();
 
             // let's query the remote service
+            // TODO 9
             var chocolateOrderPartitionInformation = ServicePartitionQueryHelper
                 .QueryServicePartitions(new Uri("fabric:/Microservices.ServiceFabric/ChocolateOrder")).GetAwaiter().GetResult();
 

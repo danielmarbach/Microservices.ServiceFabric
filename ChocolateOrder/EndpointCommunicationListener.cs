@@ -58,6 +58,7 @@ namespace ChocolateOrder
 
         static void ConfigureReceiverSideDistributionOrderShipped(TransportExtensions transportConfig, PartitionsInformation partitionInfo)
         {
+            // TODO 10
             var routing = transportConfig.Routing();
             var receiverSideDistribution = routing.EnableReceiverSideDistribution(partitionInfo.Partitions);
             receiverSideDistribution.AddPartitionMappingForMessageType<OrderShipped>(

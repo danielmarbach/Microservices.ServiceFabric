@@ -11,6 +11,7 @@ namespace ChocolateShipping
 
         public Task Handle(ShipOrder message, IMessageHandlerContext context)
         {
+            // TODO 8
             Logger.Log($"ShipOrderHandler: Shipping {message.OrderId} on partition [{ PartitionInformation.LowKey}, { PartitionInformation.HighKey }].");
             return context.Publish(new OrderShipped { OrderId = message.OrderId });
         }

@@ -21,6 +21,78 @@
   - Show Diagnostics windows and how the service instances are working
 - Switch to http://localhost:8081/chaostest/ and let the chaos test run, show dashboard with update refresh count fast how service heals itself
 
+Nuget packages
+
+```
+Microsoft.ServiceFabric.FabricTransport
+Microsoft.ServiceFabric.Services.Remoting
+```
+
+```
+[DataContract]
+public class Result
+{
+    [DataMember]
+    public string Message { get; set; }
+
+    [DataMember]
+    public long InstanceId { get; set; }
+}
+public interface IChocolateService : IService
+{
+    Task<Result> SayHello();
+}
+```
+
+```
+using System;
+using System.Threading.Tasks;
+using Contracts;
+using Microsoft.ServiceFabric.Services.Remoting.Client;
+
+namespace Connector
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            MainAsync().GetAwaiter().GetResult();
+        }
+
+        static async Task MainAsync()
+        {
+            long counter = 0;
+            long previous = -1;
+            var proxy = ServiceProxy.Create<IChocolateService>(new Uri("fabric:/ChocolateMicroservices/ChocolateService"));
+            while (true)
+            {
+                if (counter++ % 10 == 0)
+                {
+                    Console.Clear();
+                }
+
+                try
+                {
+                    var result = await proxy.SayHello();
+                    Console.WriteLine(result.Message);
+                    var current = result.InstanceId;
+                    if (previous != -1 && previous != current)
+                    {
+                        Console.WriteLine($"!! Failed over from {previous} to {current} !!");
+                    }
+                    previous = current;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("!");
+                }
+                await Task.Delay(TimeSpan.FromSeconds(1));
+            }
+        }
+    }
+}
+```
+
 # Demo 2
 
 - Open up View>Other Windows>Diagnostic Event

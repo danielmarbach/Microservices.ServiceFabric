@@ -11,11 +11,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="C3.ServiceFabric.HttpServiceGateway" Version="1.0.0-rtm-92" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
-    <PackageReference Include="Microsoft.ServiceFabric" Version="5.6.210" />
-    <PackageReference Include="Microsoft.ServiceFabric.AspNetCore.Kestrel" Version="2.6.210" />
-    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="2.6.210" />
+    <PackageReference Include="Microsoft.ServiceFabric" Version="5.6.220" />
+    <PackageReference Include="Microsoft.ServiceFabric.AspNetCore.Kestrel" Version="2.6.220" />
+    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="2.6.220" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Configuration" />

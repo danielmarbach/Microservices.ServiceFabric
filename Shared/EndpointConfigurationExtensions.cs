@@ -2,6 +2,7 @@
 using System.Fabric;
 using Microsoft.ServiceFabric.Data;
 using NServiceBus;
+using NServiceBus.Persistence;
 using NServiceBus.Persistence.ServiceFabric;
 
 public static class EndpointConfigurationExtensions
@@ -28,6 +29,7 @@ public static class EndpointConfigurationExtensions
         var persistence = endpointConfiguration.UsePersistence<ServiceFabricPersistence>();
         persistence.StateManager(stateManager);
 
+
         var recoverability = endpointConfiguration.Recoverability();
         recoverability.DisableLegacyRetriesSatellite();
         // for demo purposes
@@ -38,14 +40,15 @@ public static class EndpointConfigurationExtensions
 
         var connectionString = configurationPackage.Settings.Sections["NServiceBus"].Parameters["ConnectionString"];
 
-        var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
+        var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
         if (string.IsNullOrWhiteSpace(connectionString.Value))
         {
             throw new Exception("Could not read the 'NServiceBus.ConnectionString'. Check the sample prerequisites.");
         }
         transport.ConnectionString(connectionString.Value);
-        transport.UseForwardingTopology();
 
+        endpointConfiguration.UsePersistence<InMemoryPersistence, StorageType.Timeouts>();
+        endpointConfiguration.UsePersistence<InMemoryPersistence, StorageType.Subscriptions>();
         return transport;
     }
 }

@@ -24,13 +24,13 @@ namespace ChocolateOrder.Front
 
             var connectionString = configurationPackage.Settings.Sections["NServiceBus"].Parameters["ConnectionString"];
 
-            var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
+            var transport = endpointConfiguration.UseTransport<SqlServerTransport>();
             if (string.IsNullOrWhiteSpace(connectionString.Value))
             {
                 throw new Exception("Could not read the 'NServiceBus.ConnectionString' environment variable. Check the sample prerequisites.");
             }
             transport.ConnectionString(connectionString.Value);
-            transport.UseForwardingTopology();
+            //transport.UseForwardingTopology();
 
             // let's query the remote service
             // TODO 9

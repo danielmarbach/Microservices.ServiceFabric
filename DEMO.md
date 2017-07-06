@@ -96,7 +96,7 @@ namespace Connector
 # Demo 2
 
 - Open up View>Other Windows>Diagnostic Event
-- Open up http://localhost:8147/
+- Open up http://localhost:1664/orders
 
 ## With rabbit
 
@@ -115,3 +115,5 @@ Change:
 ```
 
 http://localhost:15672/
+
+## With SQL Server

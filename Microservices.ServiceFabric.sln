@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "Microservices.ServiceFabric", "Microservices.ServiceFabric\Microservices.ServiceFabric.sfproj", "{3A296898-6E36-4104-A15F-F572468BB0D7}"
 EndProject
@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Cont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{D940EC88-875E-4578-8799-39A46E126CF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChocolateOrder.Front", "ChocolateOrder.Front\ChocolateOrder.Front.csproj", "{5A077DA1-9583-4A85-A3F6-9F448F65C2DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChocolateOrder.Front", "ChocolateOrder.Front\ChocolateOrder.Front.csproj", "{5A077DA1-9583-4A85-A3F6-9F448F65C2DB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChocolateGateway", "ChocolateGateway\ChocolateGateway.csproj", "{EB363F06-FA18-4050-A950-0759ECB497DE}"
 EndProject
@@ -63,12 +63,12 @@ Global
 		{D940EC88-875E-4578-8799-39A46E126CF3}.Release|x64.Build.0 = Release|x64
 		{5A077DA1-9583-4A85-A3F6-9F448F65C2DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A077DA1-9583-4A85-A3F6-9F448F65C2DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A077DA1-9583-4A85-A3F6-9F448F65C2DB}.Debug|x64.ActiveCfg = Debug|x64
-		{5A077DA1-9583-4A85-A3F6-9F448F65C2DB}.Debug|x64.Build.0 = Debug|x64
+		{5A077DA1-9583-4A85-A3F6-9F448F65C2DB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5A077DA1-9583-4A85-A3F6-9F448F65C2DB}.Debug|x64.Build.0 = Debug|Any CPU
 		{5A077DA1-9583-4A85-A3F6-9F448F65C2DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A077DA1-9583-4A85-A3F6-9F448F65C2DB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A077DA1-9583-4A85-A3F6-9F448F65C2DB}.Release|x64.ActiveCfg = Release|x64
-		{5A077DA1-9583-4A85-A3F6-9F448F65C2DB}.Release|x64.Build.0 = Release|x64
+		{5A077DA1-9583-4A85-A3F6-9F448F65C2DB}.Release|x64.ActiveCfg = Release|Any CPU
+		{5A077DA1-9583-4A85-A3F6-9F448F65C2DB}.Release|x64.Build.0 = Release|Any CPU
 		{EB363F06-FA18-4050-A950-0759ECB497DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EB363F06-FA18-4050-A950-0759ECB497DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB363F06-FA18-4050-A950-0759ECB497DE}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -80,5 +80,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CE4D614B-636A-406C-9ACC-C508F512A2FA}
 	EndGlobalSection
 EndGlobal

@@ -20,6 +20,8 @@ namespace Connector
         {
             long counter = 0;
             long previous = -1;
+
+            // TODO 5
             var proxy = ServiceProxy.Create<IChocolateService>(new Uri("fabric:/ChocolateMicroservices/OrderChocolate"));
             while (true)
             {
@@ -30,6 +32,7 @@ namespace Connector
 
                 try
                 {
+                    // TODO 6
                     var result = await proxy.SayHello();
                     var current = result.InstanceId;
                     Console.WriteLine($"{current}: {result.Message}");

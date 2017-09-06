@@ -31,7 +31,7 @@ namespace ChocolateOrder
         {
             Data.ChocolateType = message.ChocolateType;
 
-            Logger.Log($"OrderProcessManager: Order {Data.OrderId} and type {Data.ChocolateType} on partition { PartitionInformation.Name } removerse period started.");
+            Logger.Log($"OrderProcessManager: Order {Data.OrderId} and type {Data.ChocolateType} on partition { PartitionInformation.Name } remorse period started.");
 
             return RequestTimeout<BuyersRemorsePeriodOver>(context, DateTime.UtcNow.AddSeconds(1));
         }

@@ -23,6 +23,12 @@
 # Demo 2
 
 - Open up View>Other Windows>Diagnostic Event
+
+```
+MyCompany-Microservices.ServiceFabric-ChocolateOrder
+MyCompany-Microservices.ServiceFabric-ChocolateShipping
+```
+
 - Open up http://localhost:1664/orders
 
 ## With rabbit

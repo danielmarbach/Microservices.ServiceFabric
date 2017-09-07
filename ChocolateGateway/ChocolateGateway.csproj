@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.ServiceFabric" Version="5.7.198" />
     <PackageReference Include="Microsoft.ServiceFabric.AspNetCore.Kestrel" Version="2.7.198" />
     <PackageReference Include="Microsoft.ServiceFabric.Services" Version="2.7.198" />
+    <PackageReference Include="NServiceBus.RabbitMQ" Version="4.3.3" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Configuration" />

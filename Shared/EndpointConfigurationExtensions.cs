@@ -38,13 +38,16 @@ public static class EndpointConfigurationExtensions
 
         var connectionString = configurationPackage.Settings.Sections["NServiceBus"].Parameters["ConnectionString"];
 
-        var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
+        var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
+        //var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
         if (string.IsNullOrWhiteSpace(connectionString.Value))
         {
             throw new Exception("Could not read the 'NServiceBus.ConnectionString'. Check the sample prerequisites.");
         }
         transport.ConnectionString(connectionString.Value);
-        transport.UseForwardingTopology();
+        //transport.UseForwardingTopology();
+        var delayedDelivery = transport.DelayedDelivery();
+        delayedDelivery.DisableTimeoutManager();
 
         return transport;
     }

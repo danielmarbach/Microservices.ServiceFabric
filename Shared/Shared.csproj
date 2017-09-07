@@ -15,5 +15,6 @@
     <PackageReference Include="NServiceBus" Version="6.*" />
     <PackageReference Include="NServiceBus.Azure.Transports.WindowsAzureServiceBus" Version="7.*" />
     <PackageReference Include="NServiceBus.Persistence.ServiceFabric" Version="1.*" />
+    <PackageReference Include="NServiceBus.RabbitMQ" Version="4.3.3" />
   </ItemGroup>
 </Project>

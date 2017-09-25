@@ -42,7 +42,7 @@ namespace OrderChocolate
             return Task.FromResult(new Result
             {
                 InstanceId = Context.InstanceId,
-                Message = "Hello Amsterdam!"
+                Message = $"Hello Zürich! {this.Context.CodePackageActivationContext.CodePackageVersion}"
             });
         }
     }

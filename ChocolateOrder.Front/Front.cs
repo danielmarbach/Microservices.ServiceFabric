@@ -36,7 +36,7 @@ namespace ChocolateOrder.Front
                         Logger.Log = m => ServiceEventSource.Current.ServiceMessage(serviceContext, m);
                         ServiceEventSource.Current.ServiceMessage(serviceContext, $"Starting WebListener on {url}");
 
-                        return new WebHostBuilder().UseWebListener()
+                        return new WebHostBuilder().UseKestrel()
                                     .ConfigureServices(
                                         services => services
                                             .AddSingleton<StatelessServiceContext>(serviceContext))

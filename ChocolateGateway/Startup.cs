@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Net;
 using C3.ServiceFabric.HttpCommunication;
 using C3.ServiceFabric.HttpServiceGateway;

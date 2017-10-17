@@ -18,6 +18,7 @@ namespace Connector
         
         static async Task Main()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             long counter = 0;
             long previous = -1;
 
@@ -38,13 +39,19 @@ namespace Connector
                     Console.WriteLine($"{current}: {result.Message}");
                     if (previous != -1 && previous != current)
                     {
+                        var currentColor = Console.ForegroundColor;
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine($"!! Failed over from {previous} to {current} !!");
+                        Console.ForegroundColor = currentColor;
                     }
                     previous = current;
                 }
                 catch (Exception)
                 {
+                    var currentColor = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("!");
+                    Console.ForegroundColor = currentColor;
                 }
                 await Task.Delay(TimeSpan.FromSeconds(1));
             }

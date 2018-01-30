@@ -8,6 +8,9 @@ public static class EndpointConfigurationExtensions
 {
     public static TransportExtensions ApplyCommonConfiguration(this EndpointConfiguration endpointConfiguration, IReliableStateManager stateManager, ServicePartitionInformation partitionInformation, StatefulServiceContext context)
     {
+        var assemblyScanner = endpointConfiguration.AssemblyScanner();
+        assemblyScanner.ExcludeAssemblies("netstandard");
+
         endpointConfiguration.SendFailedMessagesTo("error");
         endpointConfiguration.AuditProcessedMessagesTo("audit");
         endpointConfiguration.UseSerialization<JsonSerializer>();

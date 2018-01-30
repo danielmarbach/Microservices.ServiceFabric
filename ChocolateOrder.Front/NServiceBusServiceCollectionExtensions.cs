@@ -12,6 +12,9 @@ namespace ChocolateOrder.Front
         {
             var endpointConfiguration = new EndpointConfiguration("chocolateorder.front");
 
+            var assemblyScanner = endpointConfiguration.AssemblyScanner();
+            assemblyScanner.ExcludeAssemblies("netstandard");
+
             endpointConfiguration.AuditProcessedMessagesTo("audit");
             endpointConfiguration.UseSerialization<JsonSerializer>();
             endpointConfiguration.EnableInstallers();

@@ -12,6 +12,8 @@ namespace ChocolateOrder.Front
         {
             var endpointConfiguration = new EndpointConfiguration("chocolateorder.front");
 
+            #region NotImportant
+
             var assemblyScanner = endpointConfiguration.AssemblyScanner();
             assemblyScanner.ExcludeAssemblies("netstandard");
 
@@ -25,6 +27,10 @@ namespace ChocolateOrder.Front
             var context = provider.GetService<StatelessServiceContext>();
             var configurationPackage = context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
 
+            endpointConfiguration.SendHeartbeatTo(serviceControlQueue: "Particular.ServiceControl.RabbitMQ", frequency: TimeSpan.FromSeconds(5), timeToLive: TimeSpan.FromSeconds(15));
+            var hostInfo = endpointConfiguration.UniquelyIdentifyRunningInstance();
+            hostInfo.UsingCustomDisplayName("chocolateorder.front");
+
             var connectionString = configurationPackage.Settings.Sections["NServiceBus"].Parameters["ConnectionString"];
 
             var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
@@ -37,6 +43,8 @@ namespace ChocolateOrder.Front
             //transport.UseForwardingTopology();
             var delayedDelivery = transport.DelayedDelivery();
             delayedDelivery.DisableTimeoutManager();
+
+            #endregion
 
             // let's query the remote service
             // TODO 9

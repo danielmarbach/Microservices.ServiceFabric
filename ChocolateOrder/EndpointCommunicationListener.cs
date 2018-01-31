@@ -8,6 +8,7 @@ using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using NServiceBus;
 using NServiceBus.Persistence.ServiceFabric;
+using Shared;
 
 namespace ChocolateOrder
 {
@@ -36,6 +37,19 @@ namespace ChocolateOrder
                 .ConfigureAwait(false);
 
             endpointConfiguration = new EndpointConfiguration("chocolateorder");
+
+            #region Monitoring
+
+            endpointConfiguration.SendHeartbeatTo(serviceControlQueue: "Particular.ServiceControl.RabbitMQ", frequency: TimeSpan.FromSeconds(5), timeToLive: TimeSpan.FromSeconds(15));
+            var hostInfo = endpointConfiguration.UniquelyIdentifyRunningInstance();
+            var instanceId = partitionInfo.LocalPartitionKey != null ? $"chocolateorder-{partitionInfo.LocalPartitionKey}" : "chocolateorder";
+            hostInfo.UsingCustomDisplayName(instanceId);
+            hostInfo.UsingCustomIdentifier(DeterministicIdBuilder.ToGuid(instanceId));
+
+            var metrics = endpointConfiguration.EnableMetrics();
+            metrics.SendMetricDataToServiceControl(serviceControlMetricsAddress: "Particular.Monitoring.RabbitMQ", interval: TimeSpan.FromSeconds(5));
+
+            #endregion
 
             var transport = endpointConfiguration.ApplyCommonConfiguration(stateManager, servicePartitionInformation, context);
 

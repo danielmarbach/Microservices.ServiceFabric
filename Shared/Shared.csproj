@@ -11,10 +11,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.ServiceFabric.Data" Version="2.8.211" />
     <PackageReference Include="Microsoft.ServiceFabric" Version="6.0.211" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.*" />
-    <PackageReference Include="NServiceBus" Version="6.4.1" />
-    <PackageReference Include="NServiceBus.Azure.Transports.WindowsAzureServiceBus" Version="7.2.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="NServiceBus" Version="6.4.3" />
+    <PackageReference Include="NServiceBus.Azure.Transports.WindowsAzureServiceBus" Version="7.2.11" />
     <PackageReference Include="NServiceBus.Persistence.ServiceFabric" Version="1.*" />
-    <PackageReference Include="NServiceBus.RabbitMQ" Version="4.4.0" />
+    <PackageReference Include="NServiceBus.RabbitMQ" Version="4.4.1" />
   </ItemGroup>
 </Project>

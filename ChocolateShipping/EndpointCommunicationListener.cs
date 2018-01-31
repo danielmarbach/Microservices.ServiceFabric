@@ -7,6 +7,7 @@ using Contracts;
 using Microsoft.ServiceFabric.Data;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using NServiceBus;
+using Shared;
 
 namespace ChocolateShipping
 {
@@ -35,6 +36,19 @@ namespace ChocolateShipping
                 .ConfigureAwait(false);
 
             endpointConfiguration = new EndpointConfiguration("chocolateshipping");
+
+            #region Monitoring
+
+            endpointConfiguration.SendHeartbeatTo(serviceControlQueue: "Particular.ServiceControl.RabbitMQ", frequency: TimeSpan.FromSeconds(5), timeToLive: TimeSpan.FromSeconds(15));
+            var hostInfo = endpointConfiguration.UniquelyIdentifyRunningInstance();
+            var instanceId = partitionInfo.LocalPartitionKey != null ? $"chocolateshipping-{partitionInfo.LocalPartitionKey}" : "chocolateshipping";
+            hostInfo.UsingCustomDisplayName(instanceId);
+            hostInfo.UsingCustomIdentifier(DeterministicIdBuilder.ToGuid(instanceId));
+
+            var metrics = endpointConfiguration.EnableMetrics();
+            metrics.SendMetricDataToServiceControl(serviceControlMetricsAddress: "Particular.Monitoring.RabbitMQ", interval: TimeSpan.FromSeconds(5));
+
+            #endregion
 
             var transport = endpointConfiguration.ApplyCommonConfiguration(stateManager, servicePartitionInformation, context);
 

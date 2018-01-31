@@ -8,6 +8,6 @@
     <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="NServiceBus" Version="6.4.1" />
+    <PackageReference Include="NServiceBus" Version="6.4.3" />
   </ItemGroup>
 </Project>

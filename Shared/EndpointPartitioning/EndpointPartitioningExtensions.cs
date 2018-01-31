@@ -23,5 +23,9 @@ public static class EndpointPartitioningExtensions
         endpointInstances.AddOrReplaceInstances(endpointName, destinationEndpointInstances);
 
         endpointConfiguration.EnableFeature<HardcodeReplyToAddressToLogicalAddressFeature>();
+
+        var augmentedEndpointName = $"{endpointName}-{localPartitionKey}";
+        endpointConfiguration.Pipeline.Register(new HackEndpointNameBehavior.Registration(augmentedEndpointName));
+        endpointConfiguration.Pipeline.Register(new HackHostInfoHeadersBehavior.Registration(augmentedEndpointName));
     }
 }

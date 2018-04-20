@@ -110,7 +110,7 @@ namespace ChocolateShipping
 
         public Task CloseAsync(CancellationToken cancellationToken)
         {
-            return endpointInstance.Stop();
+            return endpointInstance != null ? endpointInstance.Stop() : Task.CompletedTask;
         }
 
         public void Abort()

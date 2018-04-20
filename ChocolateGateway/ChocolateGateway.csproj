@@ -10,12 +10,12 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="C3.ServiceFabric.HttpServiceGateway" Version="2.0" />
+    <PackageReference Include="C3.ServiceFabric.HttpServiceGateway" Version="2.0.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
-    <PackageReference Include="Microsoft.ServiceFabric" Version="6.0.219" />
-    <PackageReference Include="Microsoft.ServiceFabric.AspNetCore.Kestrel" Version="2.8.219" />
-    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="2.8.219" />
+    <PackageReference Include="Microsoft.ServiceFabric" Version="6.*" />
+    <PackageReference Include="Microsoft.ServiceFabric.AspNetCore.Kestrel" Version="3.*" />
+    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="3.*" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Configuration" />

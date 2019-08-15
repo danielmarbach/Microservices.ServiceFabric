@@ -24,7 +24,7 @@ The font used in the slides is
 ## NServiceBus
 
 * [Getting started](https://docs.particular.net/tutorials/intro-to-nservicebus/)
-* [Service Fabric Routing])(https://docs.particular.net/samples/azure/azure-service-fabric-routing/)
+* [Service Fabric Routing](https://docs.particular.net/samples/azure/azure-service-fabric-routing/)
 
 ## Orleans
 
